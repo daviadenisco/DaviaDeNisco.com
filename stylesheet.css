@@ -1,0 +1,315 @@
+/* RESET */
+
+html, body, header, section, footer, div, i, h1, h2, h3, h4,
+h5, h6, ul, li, p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  line-height: 1;
+  overflow: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+/* CLEARFIX */
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* GENERAL */
+
+a {
+  color: black;
+}
+
+#main {
+  display: block;
+  width: 900px;
+  min-height: 450px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* SIDEBAR */
+
+#sidebar {
+  float: left;
+  width: 210px;
+  height: 100%;
+  padding: 20px 15px 20px 20px;
+  border-right: 5px solid #000;
+}
+
+
+#sidebar > .link-list > li {
+  margin-bottom: 10px;
+  font-family: Dosis;
+  font-size: 36px;
+  float: right;
+  cursor: pointer;
+  transition: color 0.5s linear;
+}
+
+#sidebar > .link-list > li:hover {
+  -webkit-animation: pulse 10s infinite alternate;
+}
+
+#sidebar > .bonus {
+  margin-top: 50px;
+}
+
+.fa-external-link {
+  font-size: 10px;
+  float: right;
+  padding-top: 5px;
+  padding-left: 5px;
+
+}
+
+/* CONTENT */
+
+.content {
+  float: right;
+  width: 610px;
+  padding: 20px;
+  padding-right: 10px;
+  background: white;
+  font-family: Lato, sans-serif;
+}
+
+h2 {
+  display: inline-block;
+  font-size: 36px;
+  margin: 0px 20px 20px 0px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h2 > small {
+  display: block;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.content > img.in-progress {
+  width: 250px;
+  margin: 50px;
+}
+
+.alert {
+  font-size: 20px;
+}
+
+.project-info > .project-header {
+  border-bottom: 2px solid #000;
+  margin-bottom: 10px;
+}
+
+.project-info > .project-header > strong {
+  display: inline-block;
+  float: left;
+  width: 250px;
+}
+
+.project-info > .project-header > p {
+  float: right;
+}
+
+.screenshot-large {
+  float: left;
+  width: 150px;
+  margin-bottom: 20px;
+  border: 3px solid #000;
+  border-radius: 10px;
+}
+
+.project-info > .screenshot {
+  float: left;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.project-info > .project-links {
+  float: right;
+  margin: 10px 0px 60px 0px;
+}
+
+.project-info > .project-links > a{
+  position: relative;
+  margin-left: 10px;
+  text-decoration: none;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.project-info > .project-links > a:hover {
+  -webkit-animation: pulse 10s infinite alternate;
+  box-shadow: -1px 1px 1px 0px;
+}
+
+.project-info > .project-description {
+  position: relative;
+  display: block;
+  width: 300px;
+  font-size: 16px;
+  top: 10px;
+  left: 10px;
+}
+
+.content > .resume-field > .icon-row {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.content > .resume-field > .icon-row > img {
+  width: 45px;
+  height: 40px;
+}
+
+.content > .resume-field > p {
+  margin: 0px 0px 20px 0px;
+}
+
+.content > .nature-art {
+  margin: 83px 0px 0px 0px;
+  padding-left: 50px;
+  width: 150px;
+}
+
+.content > .nature-art-wide {
+  margin-top: 40px;
+  width: 650px;
+}
+
+.chickadee-screenshot {
+  width: 400px;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+.chickadee-links {
+  display: inline-block;
+  margin: 20px 0px 40px 0px;
+}
+
+.chickadee-links > a {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.chickadee-description {
+  font-size: 16px;
+}
+
+.feature-list {
+  float: left;
+  margin-left: 30px;
+}
+
+.feature-list li {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.artwork {
+  margin-left: 20px;
+}
+
+#collage img {
+  width: 80%;
+}
+
+#audubon img {
+  width: 40%;
+  margin-top: 10px;
+}
+
+#audubon #rtha {
+  border-top: 16px solid rgb(182, 74, 35);
+  border-bottom: 16px solid rgb(182, 74, 35);
+}
+
+.album-cover {
+  cursor: pointer;
+  float: left;
+  width: 250px;
+  height: 250px;
+}
+
+.promo-area {
+  min-height: 250px;
+  width: 550px;
+  margin-top: 20px;
+}
+
+.promo-description {
+  width: 280px;
+  float: right;
+}
+
+.promo-description a {
+  cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  font-family: Lato, sans-serif;
+  text-align: center;
+}
+
+
+/*EFFECTS*/
+
+@-webkit-keyframes pulse {
+  0% {color: #669999;}
+  20% {color: #CC6600;}
+  40% {color: #9900CC;}
+  60% {color: #339900;}
+  80% {color: #CC0000;}
+  100% {color: #0000CC;}
+}
+
+/* Grow from Hover by Ian Lunn (http://ianlunn.github.io/Hover/) */
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

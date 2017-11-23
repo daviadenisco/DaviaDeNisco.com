@@ -1,0 +1,60 @@
+/* HEADER */
+
+header {
+  width: 96%;
+  min-height: 80px;
+  padding: 20px 2% 5px;
+}
+
+header > h1 > a {
+  display: block;
+  width: 420px;
+  font-size: 64px;
+  font-family: Dosis, sans-serif;
+  font-weight: 800;
+  color: #669999;
+  -webkit-animation: pulse 30s infinite alternate;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+header > .icon-row {
+  display: block;
+  width: 450px;
+  float: none;
+  clear: left;
+  margin: 15px auto;
+  padding-right: 5px;
+}
+
+@media (min-width: 915px) {
+  header > h1 > a {
+    margin: 0 18px 0 0;
+    float: left;
+  }
+
+  header > .icon-row {
+    float: left;
+    clear: none;
+    margin: 15px 0 0;
+  }
+}
+
+header > .icon-row > a {
+  display: inline-block;
+  width: 70px;
+  height: 40px;
+  color: black;
+  font-size: 36px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.5s linear;
+}
+
+header > .icon-row > a:last-of-type {
+  margin-left: 10px;
+}
+
+header > .icon-row > a:hover {
+  -webkit-animation: pulse 10s infinite alternate;
+}
