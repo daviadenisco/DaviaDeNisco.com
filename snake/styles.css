@@ -1,5 +1,5 @@
 body {
-  background: tan;
+  background: rosyBrown;
 }
 #grid {
   /*display: flex;*/
@@ -9,10 +9,10 @@ body {
 }
 .row {
   display:flex;
-  background: white;
+  background: whiteSmoke;
 }
 .col {
-  border: 1px solid black;
+  border: 1px solid lightGray;
   border-top: none;
   border-left: none;
   flex:1;
@@ -24,13 +24,16 @@ body {
   padding-top:100%;
 }
 .row:first-child {
-  border-top: 1px solid black;
+  border-top: 1px solid lightGray;
 }
 .col:first-child {
-  border-left: 1px solid black;
+  border-left: 1px solid lightGray;
 }
 .snake {
   background: lightGreen;
+}
+.col.bug {
+  background: black;
 }
 /*#spider {
   background-image: image("spider.jpg");
