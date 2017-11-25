@@ -1,0 +1,38 @@
+body {
+  background: tan;
+}
+#grid {
+  /*display: flex;*/
+  width: 50vw;
+  display: block;
+  margin: 0 auto;
+}
+.row {
+  display:flex;
+  background: white;
+}
+.col {
+  border: 1px solid black;
+  border-top: none;
+  border-left: none;
+  flex:1;
+  height: auto;
+}
+.col:before {
+  content:'';
+  float:left;
+  padding-top:100%;
+}
+.row:first-child {
+  border-top: 1px solid black;
+}
+.col:first-child {
+  border-left: 1px solid black;
+}
+.snake {
+  background: lightGreen;
+}
+/*#spider {
+  background-image: image("spider.jpg");
+  height: auto;
+}*/
