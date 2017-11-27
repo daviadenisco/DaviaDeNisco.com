@@ -32,10 +32,12 @@ body {
 .snake {
   background: lightGreen;
 }
-.col.bug {
+/*.col.bug {
   background: black;
-}
-/*#spider {
-  background-image: image("spider.jpg");
-  height: auto;
+  background: radial-gradient(circle, black, white);
 }*/
+.col.bug {
+  background: url(snakeFood.png) black;
+  /*display: flex;*/
+  /*height: auto;*/
+}

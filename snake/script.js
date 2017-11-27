@@ -144,6 +144,6 @@ function triggerBug() {
   // sets timeout for bug to appear after 3 seconds, instead of the other way around
   setTimeout(function(){
     bugEl.classList.toggle("bug");
-  }, 5000);
+  }, 10000);
 }
 triggerBug();
