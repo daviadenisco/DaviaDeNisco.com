@@ -85,67 +85,43 @@ function randoNumGen(amt) {
 //========================================
 // SNAKE STUFF
 //========================================
-
-// ADD SNAKE CLASS to current grid space
-function addSnakeClass() {
-  // just .class will not work, and must include space before the className so it doesn't interfere with the other class names
-  cC = getElement(currentRow, currentCol)
-  cC.classList.add("snake");
-}
-addSnakeClass();
+cC = getElement(currentRow, currentCol)
+cC.classList.add("snake");
 snakeArr.push(cC);
 
 // MOVE AND / OR GROW SNAKE
-function moveSnake(nextElement, currentElement) {
+function moveSnake(row, col) {
+  let newSnakeHead = getElement(row, col)
+  console.log(row)
+  newSnakeHead.classList.add("snake");
   if (bugEaten === false) {
     snakeArr.pop().classList.remove("snake");
   }
-  snakeArr.unshift(nextElement);
+  snakeArr.unshift(newSnakeHead);
   bugEaten = false;
 }
 
 // ADD EVENT LISTENERS TO ARROW KEYS
 // Add event listeners to the arrow keys. These keys will move snakey. When someone hits the “left” arrow key, you want the current location of snakey to decrease by one column:
 document.onkeydown = checkKey;
+let lastKeyPressed = null;
 
 function checkKey(e) {
   e = e || window.event;
   if (e.keyCode == '38') {
-    // gets the element of the next potential position of the snake
-    potentialNewPosition = getElement(currentRow - 1, currentCol);
-    // up arrow, decrease by one row
-    currentRow -= 1;
+    lastKeyPressed = "up";
 
   } else if (e.keyCode == '40') {
-    // gets the element of the next potential position of the snake
-    potentialNewPosition = getElement(currentRow + 1, currentCol);
-    // down arrow, increase by one row
-    currentRow += 1;
+    lastKeyPressed = "down";
 
   } else if (e.keyCode == '37') {
-    // gets the element of the next potential position of the snake
-    potentialNewPosition = getElement(currentRow, currentCol - 1);
-    // left arrow, decrease by one col
-    currentCol -= 1;
+    lastKeyPressed = "left";
 
   } else if (e.keyCode == '39') {
-    // gets the element of the next potential position of the snake
-    potentialNewPosition = getElement(currentRow, currentCol + 1);
-    // right arrow, increase by one col
-    currentCol += 1;
+    lastKeyPressed = "right";
 
   }
-  // adds snake class to cC
-  addSnakeClass();
-  if (potentialNewPosition.classList[2] === "bug") {
-    potentialNewPosition.classList.remove("bug");
-    score += 1;
-    triggerBug();
-    bugEaten = true;
-  }
-  // move snake and/or grow snake by 1
-  moveSnake(potentialNewPosition, currentElement);
-  scoreDisplay.innerHTML = score * 100;
+
 }
 
 //========================================
@@ -160,7 +136,6 @@ function triggerBug() {
   let bugRow = randoNumGen(rows);
   let bugCol = randoNumGen(cols);
   let bugEl = getElement(bugRow, bugCol);
-  console.log("bugEl", bugEl);
   // adds or removes bug class to make bug appear in diff places around the board
   // HOW CAN I EFFICIENTLY GOOGLE HOW TO DO THIS?
   // THAT'S NESTED HOW TO DO BY THE WAY
@@ -179,16 +154,65 @@ triggerBug();
 //========================================
 // NEW GAME STUFF
 //========================================
-resetButton.addEventListener("click", function(){
-  // remove current grid
-  grid.innerHTML = "";
-  // generate new grid
-  createGrid(rows, cols);
-  // reset snake class on random element
-  currentRow = randoNumGen(rows);
-  currentCol = randoNumGen(cols);
-  // add snake class
-  addSnakeClass();
-  // reset bug class on random element
-  triggerBug();
-});
+// resetButton.addEventListener("click", function(){
+//   // remove current grid
+//   grid.innerHTML = "";
+//   // generate new grid
+//   createGrid(rows, cols);
+//   // reset snake class on random element
+//   currentRow = randoNumGen(rows);
+//   currentCol = randoNumGen(cols);
+//   // add snake class
+//   addSnakeClass();
+//   // reset bug class on random element
+//   triggerBug();
+// });
+
+//========================================
+// GAME LOOP
+//========================================
+
+let gameLoop = setInterval(function() {
+  if (lastKeyPressed === "up") {
+      // gets the element of the next potential position of the snake
+      potentialNewPosition = getElement(currentRow - 1, currentCol);
+      // up arrow, decrease by one row
+      currentRow -= 1;
+  } else if (lastKeyPressed === "down") {
+      // gets the element of the next potential position of the snake
+      potentialNewPosition = getElement(currentRow + 1, currentCol);
+      // down arrow, increase by one row
+      currentRow += 1;
+  } else if (lastKeyPressed === "left") {
+      // gets the element of the next potential position of the snake
+      potentialNewPosition = getElement(currentRow, currentCol - 1);
+      // left arrow, decrease by one col
+      currentCol -= 1;
+  } else if (lastKeyPressed === "right") {
+      // gets the element of the next potential position of the snake
+      potentialNewPosition = getElement(currentRow, currentCol + 1);
+      // right arrow, increase by one col
+      currentCol += 1;
+  } else {
+    // no key pressed yet
+  }
+
+  if (lastKeyPressed !== null) {
+    // TODO: CHECK FOR GAME OVER:
+    // Check for snake running into itself or running into a wall
+    // If snake runs into a wall or itself, clearInterval(gameLoop) and break;
+
+    // If the game isn't over, check if snake ate bug and then move snake
+    if (potentialNewPosition.classList[2] === "bug") {
+      potentialNewPosition.classList.remove("bug");
+      score += 1;
+      triggerBug();
+      bugEaten = true;
+    }
+
+    // move snake and/or grow snake by 1
+    moveSnake(currentRow, currentCol);
+    scoreDisplay.innerHTML = score * 100;
+  }
+
+}, 80);
