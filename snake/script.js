@@ -1,6 +1,4 @@
-// NEXT STEPS
-// feed snakeArr currentElement
-// make snake grow
+// NEXT STEPS: see todo below
 // game over screen with option to try again
 // game over if hit "wall"
 // game over if hit "snake"
@@ -9,8 +7,11 @@
 // UTILITIES
 //========================================
 
-//VARIABLE FOR GRID
+// VARIABLE FOR GRID
 let grid = document.getElementById("grid");
+
+// VARIABLE FOR BODY
+let body = document.getElementById("body");
 
 // VARIABLES FOR ROWS AND COLUMNS
 let rows = 50;
@@ -37,14 +38,12 @@ let snakeArr = [];
 
 // VARIABLE TO TARGET POTENTIAL NEW POSITION
 let potentialNewPosition;
+
 // VARIABLE TO TRY AGAIN / START A NEW GAME
 let resetButton = document.querySelector("#newGame");
 
 // VARIABLE TO TRACK WHETHER BUGS EATEN
 let bugEaten = false;
-
-// VARIABLE FOR POTENTIAL NEW POSITION CLASS LIST
-// let potNewPosCL = potentialNewPosition.classList;
 
 // CREATE GRID
 // append div row elements and append columns to div rows
@@ -72,8 +71,10 @@ createGrid(rows, cols);
 
 // GET ANY ELEMENT ON THE GRID
 function getElement(rowNum, colNum) {
+  // creates a rowSelector and numbers the rows but numbers need to be strings and can't be just a number string so we have to add the .r and the .c, so we'll get row nums like .r37
   let rowSelector = '.r' + rowNum.toString();
   // class .col within each row will have only one col with the random num in the class
+  // must include space before the .c so it won't look like .r37.c32
   return document.querySelector(rowSelector + ' .c' + colNum.toString())
 }
 
@@ -85,8 +86,12 @@ function randoNumGen(amt) {
 //========================================
 // SNAKE STUFF
 //========================================
+
+// SETS VARIABLE EQUAL TO A RANDOM CELL
 cC = getElement(currentRow, currentCol)
+// ADD SNAKE CLASS TO THE RANDOM CELL
 cC.classList.add("snake");
+// PUSH THAT LOCATION TO snakeArr
 snakeArr.push(cC);
 
 // MOVE AND / OR GROW SNAKE
@@ -110,18 +115,13 @@ function checkKey(e) {
   e = e || window.event;
   if (e.keyCode == '38') {
     lastKeyPressed = "up";
-
   } else if (e.keyCode == '40') {
     lastKeyPressed = "down";
-
   } else if (e.keyCode == '37') {
     lastKeyPressed = "left";
-
   } else if (e.keyCode == '39') {
     lastKeyPressed = "right";
-
   }
-
 }
 
 //========================================
@@ -136,37 +136,20 @@ function triggerBug() {
   let bugRow = randoNumGen(rows);
   let bugCol = randoNumGen(cols);
   let bugEl = getElement(bugRow, bugCol);
+  console.log("bugEl", bugEl);
   // adds or removes bug class to make bug appear in diff places around the board
   // HOW CAN I EFFICIENTLY GOOGLE HOW TO DO THIS?
-  // THAT'S NESTED HOW TO DO BY THE WAY
-  if (bugEl.classList[2] !== "snake") {
+  // DO NOT LET BUGS APPEAR ON TOP OF SNAKE
+  if (snakeArr.indexOf(bugEl) === -1) {
     bugEl.classList.add("bug");
-    setTimeout(function() {
-      bugEl.classList.toggle("bug");
-    }, 10000);
-  } else {
-    bugEl = getElement(bugRow, bugCol);
+    // setTimeout(function() {
+    //   if (snakeArr.indexOf(bugEl === -1) {
+    //     bugEl.classList.toggle("bug");
+    //   })
+    // }, 10000);
   }
-  // sets timeout for bug to appear after 3 seconds, instead of the other way around
 }
 triggerBug();
-
-//========================================
-// NEW GAME STUFF
-//========================================
-// resetButton.addEventListener("click", function(){
-//   // remove current grid
-//   grid.innerHTML = "";
-//   // generate new grid
-//   createGrid(rows, cols);
-//   // reset snake class on random element
-//   currentRow = randoNumGen(rows);
-//   currentCol = randoNumGen(cols);
-//   // add snake class
-//   addSnakeClass();
-//   // reset bug class on random element
-//   triggerBug();
-// });
 
 //========================================
 // GAME LOOP
@@ -197,12 +180,11 @@ let gameLoop = setInterval(function() {
     // no key pressed yet
   }
 
+
   if (lastKeyPressed !== null) {
     // TODO: CHECK FOR GAME OVER:
-    // Check for snake running into itself or running into a wall
-    // If snake runs into a wall or itself, clearInterval(gameLoop) and break;
+    // If snake runs into a wall or itself, clearInterval(gameLoop)
 
-    // If the game isn't over, check if snake ate bug and then move snake
     if (potentialNewPosition.classList[2] === "bug") {
       potentialNewPosition.classList.remove("bug");
       score += 1;
@@ -210,9 +192,25 @@ let gameLoop = setInterval(function() {
       bugEaten = true;
     }
 
-    // move snake and/or grow snake by 1
+    if (snakeArr.indexOf(potentialNewPosition) !== -1) {
+      clearInterval(gameLoop);
+      grid.innerHTML = "";
+      body.classList.add("gameOver");
+    }
+    if (!potentialNewPosition) {
+      clearInterval(gameLoop);
+      grid.innerHTML = "";
+      body.classList.add("gameOver");
+    }
     moveSnake(currentRow, currentCol);
     scoreDisplay.innerHTML = score * 100;
+
+    // GAME WON SCREEN
+    // if (snakeArr.length > 2,498) {
+    //   clearInterval(gameLoop);
+    //   grid.innerHTML = "";
+    //   body.classList.add("youWin");
+    // }
   }
 
-}, 80);
+}, 100);
