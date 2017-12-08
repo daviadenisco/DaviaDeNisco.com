@@ -138,7 +138,7 @@ function triggerBug() {
   if (snakeArr.indexOf(bugEl) === -1) {
     bugEl.classList.add("bug");
     setTimeout(function() {
-      if (bugEl.classList[2] === "bug") {
+      if (!gameOver && bugEl.classList[2] === "bug") {
         bugEl.classList.remove("bug");
         triggerBug();
       }
@@ -152,6 +152,7 @@ triggerBug();
 //========================================
 // GAME LOOP
 //========================================
+let gameOver = false;
 
 let gameLoop = setInterval(function() {
   if (lastKeyPressed === "up") {
@@ -186,11 +187,14 @@ let gameLoop = setInterval(function() {
       body.classList.add("gameOver");
       let highScore = window.localStorage["High Score"];
       if (!highScore) {
+        window.alert("Your First Score Is: " + ((score * 100).toString()))
         window.localStorage["High Score"] = score * 100;
       } else if (score > highScore) {
-        alert("New High Score!")
+        window.alert("New High Score: " + ((score * 100).toString()))
         window.localStorage["High Score"] = score * 100;
       }
+      gameOver = true;
+      return;
     }
     if (potentialNewPosition.classList[2] === "bug") {
       potentialNewPosition.classList.remove("bug");
