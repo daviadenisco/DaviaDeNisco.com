@@ -227,25 +227,27 @@ function mobileAndTabletcheck() {
 if (mobileAndTabletcheck()) {
   // Third-party library for handling touch events
   // https://hammerjs.github.io/getting-started/
-  var options = {
-    preventDefault: true,
-    dragLockToAxis: true,
-    dragBlockHorizontal: true
-  };
-  var hammertime = new Hammer(document.body, options);
-  hammertime.on("dragleft swipeleft", function(ev){
+  var hammertime = new Hammer.Manager(body, {
+    touchAction: 'auto',
+    inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
+    recognizers: [
+      [Hammer.Swipe, {
+        direction: Hammer.DIRECTION_ALL
+      }]
+    ]
+  });
+  hammertime.on("dragleft swipeleft panleft", function(ev){
     lastKeyPressed = "left"
   });
-  hammertime.on("dragright swiperight", function(ev){
+  hammertime.on("dragright swiperight panright", function(ev){
     lastKeyPressed = "right"
   });
-  hammertime.on('panup', function(ev) {
+  hammertime.on('panup swipeup dragup', function(ev) {
   	lastKeyPressed = "up"
   });
-  hammertime.on('pandown', function(ev) {
+  hammertime.on('pandown swipedown dragdown', function(ev) {
   	lastKeyPressed = "down"
   });
-
   body.classList.add("mobile")
 
   // PREVENTS SCROLLING WHOLE PAGE ON MOBILE (called "scroll bounce")

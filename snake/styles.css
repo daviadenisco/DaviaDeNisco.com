@@ -4,6 +4,7 @@ body {
   font-size: 20px;
   text-shadow: -2px 2px 2px rgba(150, 150, 150, 1);
   color: white;
+  overflow: hidden;
 }
 body.mobile #grid {
   width: 98vw;
