@@ -5,6 +5,11 @@ body {
   text-shadow: -2px 2px 2px rgba(150, 150, 150, 1);
   color: white;
 }
+body.mobile #grid {
+  width: 98vw;
+  height: 80vh;
+  margin: 12vh auto 0;
+}
 h1 {
   display: flex;
 }
@@ -12,7 +17,6 @@ p {
   float: left;
 }
 #grid {
-  /*display: flex;*/
   padding-top: 80px;
   width: 46vw;
   display: block;
@@ -76,12 +80,21 @@ a:hover {
   -webkit-transition: opacity 1.5s ease-in;
   -o-transition: opacity 1.5s ease-in;
 }
+.mobile .easterEgg {
+  display: none;
+}
 .easterEgg:hover {
   opacity: 0.75;
 }
 body.gameOver {
   background: url("Game-Over-Stacked.jpg");
   background-size: cover;
+}
+body.gameOver.mobile {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
 }
 body.youWin {
   background: url("You-Win-Screen.jpg");
