@@ -189,7 +189,7 @@ let gameLoop = setInterval(function() {
       if (!highScore) {
         window.alert("Your First Score Is: " + ((score * 100).toString()))
         window.localStorage["High Score"] = score * 100;
-      } else if (score > highScore) {
+      } else if (score * 100 > highScore) {
         window.alert("New High Score: " + ((score * 100).toString()))
         window.localStorage["High Score"] = score * 100;
       }
